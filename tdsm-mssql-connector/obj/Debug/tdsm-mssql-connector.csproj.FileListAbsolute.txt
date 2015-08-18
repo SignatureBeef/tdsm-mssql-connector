@@ -1,0 +1,7 @@
+C:\Git\tdsm-mssql-connector\tdsm-mssql-connector\bin\Debug\tdsm-mssql-connector.dll
+C:\Git\tdsm-mssql-connector\tdsm-mssql-connector\bin\Debug\tdsm-mssql-connector.pdb
+C:\Git\tdsm-mssql-connector\tdsm-mssql-connector\bin\Debug\TDSM.API.dll
+C:\Git\tdsm-mssql-connector\tdsm-mssql-connector\bin\Debug\tdsm.exe
+C:\Git\tdsm-mssql-connector\tdsm-mssql-connector\bin\Debug\TDSM.API.pdb
+C:\Git\tdsm-mssql-connector\tdsm-mssql-connector\obj\Debug\tdsm-mssql-connector.dll
+C:\Git\tdsm-mssql-connector\tdsm-mssql-connector\obj\Debug\tdsm-mssql-connector.pdb
