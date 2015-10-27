@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE SqlPermissions_RemoveNodeFromUser(@prmUserName varchar(255), @prmNode varchar(255), @prmDeny bit)
+﻿CREATE PROCEDURE SqlPermissions_RemoveNodeFromUser(@prmUserName varchar(255), @prmNode varchar(255), @prmPermission int)
 as
 BEGIN
 	declare @vUserId int = 0;
@@ -11,7 +11,7 @@ BEGIN
 	select @vNodeId = Id
 	from SqlPermissions_Permissions
 	where Node = @prmNode
-		and [Deny] = @prmDeny;
+		and Permission = @prmPermission;
 
 	if @vUserId is not null and @vNodeId is not null and @vUserId > 0 and @vNodeId > 0
 		begin

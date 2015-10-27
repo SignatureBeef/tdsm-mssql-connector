@@ -1,14 +1,15 @@
 ﻿using System;
-using TDSM.API.Data;
-using TDSM.API.Logging;
-using TDSM.API.Command;
 using System.Linq;
+using OTA.Logging;
+using TDSM.Core.Command;
+using TDSM.Core.Data.Old;
+using TDSM.Core.Data.Permissions;
 
 namespace TDSM.Data.MSSQL.Tables
 {
     public class GroupTable
     {
-        private class TableDefinition
+        internal class TableDefinition
         {
             public const String TableName = "Groups";
 
@@ -119,7 +120,7 @@ namespace TDSM.Data.MSSQL.Tables
 
                 foreach (var nd in nodes)
                 {
-                    var nodeId = PermissionTable.Insert(conn, nd, false);
+                    var nodeId = PermissionTable.Insert(conn, nd, Permission.Permitted);
                     GroupPermissions.Insert(conn, id, nodeId);
                 }
             }

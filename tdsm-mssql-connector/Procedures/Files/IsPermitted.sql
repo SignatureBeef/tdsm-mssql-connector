@@ -45,7 +45,7 @@ BEGIN
 									left join SqlPermissions_Permissions nd on up.PermissionId = nd.Id
 								where u.Id = @vUserId
 									and (nd.Node = @prmNode or nd.Node = '*')
-									and nd.[Deny] = 0
+									and nd.Permission = 1 /*Permitted*/
 							)
 								begin
 									set @vPermissionValue = 1;
@@ -84,7 +84,7 @@ BEGIN
 											left join SqlPermissions_Permissions pm on gp.PermissionId = pm.Id
 										where gp.GroupId = @vGroupId
 											and (pm.Node = @prmNode or pm.Node = '*')
-											and pm.[Deny] = 1
+											and pm.Permission = 0 /*Denied*/
 									)
 										begin
 											set @vPermissionValue = 0;
@@ -98,7 +98,7 @@ BEGIN
 											left join SqlPermissions_Permissions pm on gp.PermissionId = pm.Id
 										where gp.GroupId = @vGroupId
 											and (pm.Node = @prmNode or pm.Node = '*')
-											and pm.[Deny] = 0
+											and pm.Permission = 1 /*Permitted*/
 									)
 										begin
 											set @vPermissionValue = 1;
@@ -147,7 +147,7 @@ BEGIN
 					left join SqlPermissions_Permissions nd on gp.PermissionId = nd.Id
 				where gr.ApplyToGuests = 1
 					and (nd.Node = @prmNode or nd.Node = '*')
-					and nd.[Deny] = 0
+					and nd.Permission = 1 /*Permitted*/
 			)
 				begin
 					set @vPermissionValue = 1;

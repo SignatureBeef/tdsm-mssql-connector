@@ -1,17 +1,18 @@
 ﻿using System;
-using TDSM.API.Plugin;
-using TDSM.API.Data;
-using TDSM.API.Logging;
+using OTA;
+using OTA.Logging;
+using OTA.Plugin;
+using TDSM.Core.Data;
 
 namespace TDSM.Data.MSSQL
 {
+    [OTAVersion(1, 0)]
     public class SqlPermissions : BasePlugin
     {
         public const String SQLSafeName = "SqlPermissions";
-        
+
         public SqlPermissions()
         {
-            this.TDSMBuild = 5;
             this.Version = "1";
             this.Author = "TDSM";
             this.Name = "MSSQL Connector";
@@ -26,7 +27,7 @@ namespace TDSM.Data.MSSQL
         }
 
         [Hook]
-        void OnReadConfig(ref HookContext ctx, ref HookArgs.ConfigurationLine args)
+        void OnReadConfig(ref HookContext ctx, ref HookArgs.ConfigurationFileLineRead args)
         {
             switch (args.Key)
             {
@@ -59,7 +60,7 @@ namespace TDSM.Data.MSSQL
         [Hook]
         void OnStateChange(ref HookContext ctx, ref HookArgs.ServerStateChange args)
         {
-            if (args.ServerChangeState == TDSM.API.ServerState.Initialising)
+            if (args.ServerChangeState == ServerState.Initialising)
             {
                 ProgramLog.Plugin.Log("MSSQL connector is: " + (_connector == null ? "disabled" : "enabled"));
             }

@@ -1,6 +1,7 @@
 ﻿using System;
-using TDSM.API.Data;
-using TDSM.API.Logging;
+using OTA.Logging;
+using TDSM.Core.Data.Old;
+using TDSM.Core.Data.Permissions;
 
 namespace TDSM.Data.MSSQL.Tables
 {
@@ -14,14 +15,14 @@ namespace TDSM.Data.MSSQL.Tables
             {
                 public const String Id = "Id";
                 public const String Node = "Node";
-                public const String Deny = "Deny";
+                public const String Permission = "Permission";
             }
 
             public static readonly TableColumn[] Columns = new TableColumn[]
             {
                 new TableColumn(ColumnNames.Id, typeof(Int32), true, true),
                 new TableColumn(ColumnNames.Node, typeof(String), 255),
-                new TableColumn(ColumnNames.Deny, typeof(Boolean))
+                new TableColumn(ColumnNames.Permission, typeof(Int32))
             };
 
             public static bool Exists(MSSQLConnector conn)
@@ -45,13 +46,13 @@ namespace TDSM.Data.MSSQL.Tables
             }
         }
 
-        public static long Insert(MSSQLConnector conn, string node, bool deny)
+        public static long Insert(MSSQLConnector conn, string node, Permission permission)
         {
             using (var bl = new MSSQLQueryBuilder(SqlPermissions.SQLSafeName))
             {
                 bl.InsertInto(TableDefinition.TableName, 
                     new DataParameter(TableDefinition.ColumnNames.Node, node),
-                    new DataParameter(TableDefinition.ColumnNames.Deny, deny)
+                    new DataParameter(TableDefinition.ColumnNames.Permission, permission)
                 );
 
                 return ((IDataConnector)conn).ExecuteInsert(bl);

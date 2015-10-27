@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE SqlPermissions_AddNodeToUser(@prmUserName varchar(50), @prmNode varchar(50), @prmDeny bit)
+﻿CREATE PROCEDURE SqlPermissions_AddNodeToUser(@prmUserName varchar(50), @prmNode varchar(50), @prmPermission int)
 as
 BEGIN
 	declare @vUserId int = 0;
@@ -11,13 +11,13 @@ BEGIN
 	select @vNodeId = Id
 	from SqlPermissions_Permissions
 	where Node = @prmNode
-		and [Deny] = @prmDeny;
+		and Permission = @prmPermission;
 
 	if @vNodeId is null or @vNodeId = 0
 		begin
 			insert into SqlPermissions_Permissions
-			( Node, [Deny] )
-			select @prmNode, @prmDeny;
+			( Node, Permission )
+			select @prmNode, @prmPermission;
 			set @vNodeId = SCOPE_IDENTITY();
 		end
 

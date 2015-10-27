@@ -1,8 +1,8 @@
 ﻿//#define TESTING
 using System;
-using TDSM.API.Data;
 using System.Linq;
-using TDSM.API.Logging;
+using OTA.Logging;
+using TDSM.Core.Data.Old;
 
 namespace TDSM.Data.MSSQL
 {
